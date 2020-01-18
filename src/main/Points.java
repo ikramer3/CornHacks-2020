@@ -19,7 +19,7 @@ public class Points {
 	public Points (int mpg, double distance) {
 		this.mpg = mpg;
 		this.distance = distance;
-		carbonE = kgPerGallon/mpg *distance * 1000;
+		carbonE = (double)kgPerGallon/mpg *distance * 1000;
 		points = (int) (Math.round(carbonE) / 50);
 	}
 	
@@ -42,7 +42,7 @@ public class Points {
 	/*
 	 * getEmmission reads the game file and returns the number that represents the emissions ( the first line of the file)
 	 */
-	public double getEmissions() {
+	public static double getEmissions() {
 		double carbonEmissionTotal;
 		
 		Scanner s = null;
@@ -66,7 +66,7 @@ public class Points {
 	/*
 	 * getMPG reads the game file and returns the number that represents the miles per gallon( the second line of the file)
 	 */
-	public int getMPG() {
+	public static int getMPG() {
 		int milesPerGallon;
 		
 		Scanner s = null;
@@ -92,7 +92,7 @@ public class Points {
 	/*
 	 * getEmmission reads the game file and returns the number that represents the totalPoints ( the third line of the file)
 	 */
-	public int getTotalPoints() {
+	public static int getTotalPoints() {
 		int totalPoints;
 		
 		Scanner s = null;
@@ -120,7 +120,7 @@ public class Points {
 		
 		PrintWriter pw = null;
 		try {
-			pw = new PrintWriter(new File("C:\\Users\\asgoi\\OneDrive\\Documents\\CornHacks-2020\\src\\main\\gameData.txt"));
+			pw = new PrintWriter(new File("C:\\\\Users\\\\asgoi\\\\OneDrive\\\\Documents\\\\CornHacks-2020\\\\src\\\\main\\\\gameData.txt"));
 		} catch(FileNotFoundException fnfe) {
 			throw new RuntimeException(fnfe);
 		}
