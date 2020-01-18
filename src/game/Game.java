@@ -12,6 +12,7 @@ public class Game {
 	Canvas canvas;
 	JFrame frame;
 	Thread thread;
+	int points;
 	private boolean playing;
 	Cycler c=new Cycler();
 
@@ -20,6 +21,7 @@ public class Game {
 		this.canvas=canvas;
 		this.playing=playing;
 		this.thread=thread;
+		this.points=points;
 		loop();
 	}
 	public void init() {
@@ -27,7 +29,7 @@ public class Game {
 	}
 	public void loop() {
 		init();
-		while(playing) {
+		while(points>0) {
 			update();
 			draw();
 			pause();

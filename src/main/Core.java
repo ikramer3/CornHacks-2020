@@ -19,8 +19,9 @@ public class Core {
 		j.add(c);
 		j.setLocationRelativeTo(null);
 		j.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+		j.pack();
 		Thread t = new Thread();
 		ArtLoader loader=new ArtLoader();
-		new Game(c,j,true,t,0);
+		new Game(c,j,true,t,4);
 	}
 }

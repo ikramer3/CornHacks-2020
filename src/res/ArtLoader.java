@@ -7,13 +7,14 @@ import javax.imageio.ImageIO;
 
 public class ArtLoader {
 	
-	BufferedImage art;
+	BufferedImage art,mainMenuBit;
 	public static BufferedImage playerl1,playerl2,playerr1,playerr2;
 	int imgD=64;
 	public ArtLoader() {
 		initArt();
 	}
 	public void initArt() {
+		mainMenuBit=getImageFromPNG("MainMenuBit.jpg");
 		art=getImageFromPNG("spriteSheet.png");
 		playerl1=crop(0*imgD,0*imgD,imgD,imgD,art);
 		playerl2=crop(0*imgD,1*imgD,imgD,imgD,art);

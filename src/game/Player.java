@@ -20,27 +20,53 @@ public class Player extends Meeple{
 		yv=0;
 	}
 
-	
+
 	public void update() {		
 		move();
 	}
 	public void draw(Graphics graphics) {
-		if(facingRight&&dCol) {
+		if(xv==0&&dCol) {
+			stillDraw(graphics);
+		}else if(!dCol) {
+			if(!facingRight) {
+				graphics.drawImage(ArtLoader.playerl2,x,y,w,h,null);
+			}
+			if(facingRight) {
+				graphics.drawImage(ArtLoader.playerr2,x,y,w,h,null);
+			}
+		}else if(dCol&&xv!=0) {
+			dynamicDraw(graphics);
+		}
+
+	}
+	public void stillDraw(Graphics graphics) {
+		if(facingRight) {
 			graphics.drawImage(ArtLoader.playerr1,x,y,w,h,null);	
 		}
-		if(facingRight&&!dCol) {
-			graphics.drawImage(ArtLoader.playerr2,x,y,w,h,null);
-		}
-		if(!facingRight&&dCol) {
+		if(!facingRight) {
 			graphics.drawImage(ArtLoader.playerl1,x,y,w,h,null);	
 		}
-		if(!facingRight&&!dCol) {
-			graphics.drawImage(ArtLoader.playerl2,x,y,w,h,null);
+
+	}
+	public void dynamicDraw(Graphics graphics) {
+		if(facingRight) {
+			if(Cycler.timer>10) {
+				graphics.drawImage(ArtLoader.playerr1,x,y,w,h,null);	
+			}else {
+				graphics.drawImage(ArtLoader.playerr2,x,y,w,h,null);	
+			}
 		}
-		
+		if(!facingRight) {
+			if(Cycler.timer>10) {
+				graphics.drawImage(ArtLoader.playerl1,x,y,w,h,null);	
+			}else {
+				graphics.drawImage(ArtLoader.playerl2,x,y,w,h,null);	
+			}
+			
+		}
 	}
 
-	
+
 	public void move() {
 		if(!lCol&&KeyWatcher.leftKeyDown&&!KeyWatcher.rightKeyDown) {
 			xv=-speed;
@@ -64,6 +90,6 @@ public class Player extends Meeple{
 		x+=xv;
 		y+=yv;
 	}
-	
+
 
 }
