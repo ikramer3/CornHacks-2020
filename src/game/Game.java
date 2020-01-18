@@ -12,28 +12,31 @@ public class Game {
 	Canvas canvas;
 	JFrame frame;
 	Thread thread;
+	int points;
 	private boolean playing;
+	Cycler c=new Cycler();
 
 	public Game(Canvas canvas,JFrame frame,boolean playing,Thread thread,int points) {
 		this.frame=frame;
 		this.canvas=canvas;
 		this.playing=playing;
 		this.thread=thread;
+		this.points=points;
 		loop();
 	}
 	public void init() {
-		
+	
 	}
 	public void loop() {
 		init();
-		while(playing) {
+		while(points>0) {
 			update();
 			draw();
-			loop();
+			pause();
 		}
 	}
 	public void update() {
-		
+		c.update();
 	}
 	public void draw() {
 		if(canvas.getBufferStrategy()==null) {
@@ -46,7 +49,7 @@ public class Game {
 		
 		graphics.setColor(Color.RED);
 		graphics.fillRect(0,0,canvas.getWidth(),canvas.getHeight());
-		
+		c.draw(graphics);
 		///END DRAWING HERE///
 		
 		bs.show();

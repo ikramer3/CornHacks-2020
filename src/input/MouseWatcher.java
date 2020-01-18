@@ -119,4 +119,3 @@ public class MouseWatcher implements MouseListener, ActionListener{
 		Menu.numOfSpendablePoints=Integer.parseInt(jtx.getText());
 	}
 
-}
