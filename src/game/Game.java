@@ -1,6 +1,7 @@
 package game;
 
 import java.awt.Canvas;
+import java.awt.Color;
 import java.awt.Graphics;
 import java.awt.image.BufferStrategy;
 
@@ -18,11 +19,13 @@ public class Game {
 		this.canvas=canvas;
 		this.playing=playing;
 		this.thread=thread;
+		loop();
 	}
 	public void init() {
 		
 	}
 	public void loop() {
+		init();
 		while(playing) {
 			update();
 			draw();
@@ -41,6 +44,8 @@ public class Game {
 		
 		///DRAW HERE///
 		
+		graphics.setColor(Color.RED);
+		graphics.fillRect(0,0,canvas.getWidth(),canvas.getHeight());
 		
 		///END DRAWING HERE///
 		
