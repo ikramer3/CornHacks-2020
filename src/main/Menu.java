@@ -3,15 +3,14 @@ package main;
 import java.awt.Canvas;
 import java.awt.Color;
 import java.awt.Dimension;
-import java.awt.Font;
 import java.awt.Graphics;
-import java.awt.Rectangle;
 import java.awt.image.BufferStrategy;
 
+import game.Game;
 import input.Button;
 import input.MouseWatcher;
 
-public class Menu extends Canvas {
+public class Menu extends Canvas implements Runnable{
 
 	private static final long serialVersionUID = -4047650331291644852L;
 	public static APP_STATE appState=APP_STATE.MAIN_MENU;
@@ -20,6 +19,8 @@ public class Menu extends Canvas {
 	MouseWatcher mw;
 	Button gameButton,dataButton,backButton,enterDataButton,button1,button3,button5,button10,noPlayButton;
 	Points points;
+	public static Game game;
+	Thread thread;
 	public static int numOfSpendablePoints=0;
 	public static double gramsSaved = 0;
 
@@ -38,7 +39,6 @@ public class Menu extends Canvas {
 
 
 	public Menu() {	
-
 		gameButton=new Button("START GAME", 325, 100, WIDTH/3, HEIGHT * 1/3);
 		dataButton=new Button("ENTER MILES", 325, 300, WIDTH/3, HEIGHT * 1/3);
 		backButton=new Button("BACK", 325, 100, WIDTH/3, HEIGHT * 1/3);
@@ -55,16 +55,20 @@ public class Menu extends Canvas {
 		canvasSetSize();
 		appState=APP_STATE.MAIN_MENU;
 		this.setFocusable(true);
-		loop();
+		thread=new Thread(this);
+		thread.start();
 
 
 	}
 
 
-	private void loop() {
+	public void run() {
 		new GameWindow(this);
+		game = new Game(this,true,thread);
 		while(this.active == true) {
+			update();
 			draw();
+			pause();
 		}
 	}
 
@@ -86,13 +90,36 @@ public class Menu extends Canvas {
 			button10.draw(g, Color.cyan);
 		}
 		if(appState==APP_STATE.GAME_TEE_HEE) {
-
+			game.draw(g);
 		}
 		if(appState == APP_STATE.NO_PLAY) {
 			noPlayButton.draw(g, Color.RED);
 		}
 
 
+	}
+	
+	private void update() {
+		
+		if(appState==APP_STATE.MAIN_MENU) {
+			
+		}
+		if(appState==APP_STATE.DATA_ENTRY) {
+			
+		}
+		if(appState==APP_STATE.GAME_TEE_HEE) {
+			game.update();
+		}
+		if(appState == APP_STATE.NO_PLAY) {
+			;
+		}
+	}
+	public void pause() {
+		try {
+			thread.sleep(1000/60);
+		} catch (InterruptedException e) {
+			e.printStackTrace();
+		}
 	}
 
 

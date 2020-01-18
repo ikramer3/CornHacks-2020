@@ -3,57 +3,35 @@ package game;
 import java.awt.Canvas;
 import java.awt.Color;
 import java.awt.Graphics;
-import java.awt.image.BufferStrategy;
-
-import javax.swing.JFrame;
 
 public class Game {
 	
 	Canvas canvas;
-	JFrame frame;
 	Thread thread;
 	int points;
 	private boolean playing;
 	Cycler c=new Cycler();
 
-	public Game(Canvas canvas,JFrame frame,boolean playing,Thread thread,int points) {
-		this.frame=frame;
+	public Game(Canvas canvas,boolean playing,Thread thread) {
+		
 		this.canvas=canvas;
 		this.playing=playing;
 		this.thread=thread;
-		this.points=points;
-		loop();
 	}
 	public void init() {
-	
-	}
-	public void loop() {
-		init();
-		while(points>0) {
-			update();
-			draw();
-			pause();
-		}
+		
 	}
 	public void update() {
 		c.update();
 	}
-	public void draw() {
-		if(canvas.getBufferStrategy()==null) {
-			canvas.createBufferStrategy(3);
-		}
-		BufferStrategy bs=canvas.getBufferStrategy();
-		Graphics graphics=bs.getDrawGraphics();
+	public void draw(Graphics graphics) {
 		
-		///DRAW HERE///
 		
+		///DRAW HERE///		
 		graphics.setColor(Color.RED);
 		graphics.fillRect(0,0,canvas.getWidth(),canvas.getHeight());
 		c.draw(graphics);
-		///END DRAWING HERE///
-		
-		bs.show();
-		graphics.dispose();		
+		///END DRAWING HERE///	
 	}
 	public void pause() {
 		try {
