@@ -47,7 +47,7 @@ public class Points {
 		
 		Scanner s = null;
 		try {
-			s=new Scanner(new File("gameData.txt"));
+			s=new Scanner(new File("C:\\Users\\asgoi\\OneDrive\\Documents\\CornHacks-2020\\src\\main\\gameData.txt"));
 		} catch (FileNotFoundException e) {
 			return -1;
 		}
@@ -71,7 +71,7 @@ public class Points {
 		
 		Scanner s = null;
 		try {
-			s=new Scanner(new File("gameData.txt"));
+			s=new Scanner(new File("C:\\Users\\asgoi\\OneDrive\\Documents\\CornHacks-2020\\src\\main\\gameData.txt"));
 		} catch (FileNotFoundException e) {
 			return -1;
 		}
@@ -97,7 +97,7 @@ public class Points {
 		
 		Scanner s = null;
 		try {
-			s=new Scanner(new File("gameData.txt"));
+			s=new Scanner(new File("C:\\Users\\asgoi\\OneDrive\\Documents\\CornHacks-2020\\src\\main\\gameData.txt"));
 		} catch (FileNotFoundException e) {
 			return -1;
 		}
@@ -120,7 +120,7 @@ public class Points {
 		
 		PrintWriter pw = null;
 		try {
-			pw = new PrintWriter(new File("gameData.txt"));
+			pw = new PrintWriter(new File("C:\\Users\\asgoi\\OneDrive\\Documents\\CornHacks-2020\\src\\main\\gameData.txt"));
 		} catch(FileNotFoundException fnfe) {
 			throw new RuntimeException(fnfe);
 		}
@@ -128,6 +128,8 @@ public class Points {
 		pw.println(emissions);
 		pw.println(mpg);
 		pw.println(point);
+		
+		pw.close();
 
 	}
 	
