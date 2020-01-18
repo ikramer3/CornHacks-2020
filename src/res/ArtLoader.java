@@ -18,7 +18,7 @@ public class ArtLoader {
 		playerl1=crop(0*imgD,0*imgD,imgD,imgD,art);
 		playerl2=crop(0*imgD,1*imgD,imgD,imgD,art);
 		playerr1=crop(1*imgD,0*imgD,imgD,imgD,art);
-		playerl2=crop(1*imgD,1*imgD,imgD,imgD,art);
+		playerr2=crop(1*imgD,1*imgD,imgD,imgD,art);
 	}
 	
 	public BufferedImage crop(int x,int y,int w,int h,BufferedImage image) {

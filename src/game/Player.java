@@ -44,9 +44,11 @@ public class Player extends Meeple{
 	public void move() {
 		if(!lCol&&KeyWatcher.leftKeyDown&&!KeyWatcher.rightKeyDown) {
 			xv=-speed;
+			facingRight=false;
 		}
 		if(!rCol&&!KeyWatcher.leftKeyDown&&KeyWatcher.rightKeyDown) {
 			xv=speed;
+			facingRight=true;
 		}
 		if(dCol) {
 			if(KeyWatcher.upKeyDown) {
