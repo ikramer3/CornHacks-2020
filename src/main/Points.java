@@ -31,6 +31,10 @@ public class Points {
 		return carbonE;
 	}
 	
+	public int getObjectMPG() {
+		return mpg;
+	}
+	
 	public String toString() {
 		return "You biked " + distance + "Miles and saved " +carbonE+ " g of carbon, getting " + points + "points";
 	}
@@ -112,7 +116,7 @@ public class Points {
 		
 	}
 	
-	public void fileOutput(double emissions, int mpg, int point) {
+	public static void fileOutput(double emissions, int mpg, int point) {
 		
 		PrintWriter pw = null;
 		try {
