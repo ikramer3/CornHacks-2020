@@ -1,14 +1,17 @@
-A group to do stuff.
-
 Possible ideas
--Financial App- Isaac Kramer
+
 -Game that encourages that encourages enviornmental choices
--App that calculates money through shift
--GUI in SWING or AWT
--Incentive social app for planting trees
 -Cyclist app
 {Companies that donate money per miles} combining fitness and nature
--Enviornmental Trivia Crack
+-Enviornmental Trivia Crack or other game
+
+User inputs miles biked/ran
+User inputs approximate mpg of their car
+
+Output is how many (kilo)grams of carbon emissions saved, factoring in approximate carbon from riding
+For every certain amount of miles, points are given that can maybe be used in game 
+
+Make a game with cyclist or the like
 
 
 
