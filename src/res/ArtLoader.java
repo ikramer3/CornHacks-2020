@@ -8,11 +8,21 @@ import javax.imageio.ImageIO;
 public class ArtLoader {
 	
 	BufferedImage art;
+	public static BufferedImage playerl1,playerl2,playerr1,playerr2;
+	int imgD=64;
 	public ArtLoader() {
 		initArt();
 	}
 	public void initArt() {
-		
+		art=getImageFromPNG("spriteSheet.png");
+		playerl1=crop(0*imgD,0*imgD,imgD,imgD,art);
+		playerl2=crop(0*imgD,1*imgD,imgD,imgD,art);
+		playerr1=crop(1*imgD,0*imgD,imgD,imgD,art);
+		playerl2=crop(1*imgD,1*imgD,imgD,imgD,art);
+	}
+	
+	public BufferedImage crop(int x,int y,int w,int h,BufferedImage image) {
+		return image.getSubimage(x, y, w, h);
 	}
 	
 	public BufferedImage getImageFromPNG(String filepath) {

@@ -6,6 +6,7 @@ import javax.swing.JFrame;
 
 import game.Game;
 import input.KeyWatcher;
+import res.ArtLoader;
 
 public class Core {
 	public static void main(String[] args) {
@@ -19,6 +20,7 @@ public class Core {
 		j.setLocationRelativeTo(null);
 		j.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		Thread t = new Thread();
+		ArtLoader loader=new ArtLoader();
 		new Game(c,j,true,t,0);
 	}
 }

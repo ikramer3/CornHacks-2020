@@ -4,9 +4,10 @@ import java.awt.Color;
 import java.awt.Graphics;
 
 import input.KeyWatcher;
+import res.ArtLoader;
 
 public class Player extends Meeple{
-
+	boolean facingRight= false;
 	public Player(MEEPLE_ID id, int x, int y) {
 		super(id, x, y);
 		init();
@@ -24,8 +25,19 @@ public class Player extends Meeple{
 		move();
 	}
 	public void draw(Graphics graphics) {
-		graphics.setColor(Color.GREEN);
-		graphics.fillRect(x, y, w, h);
+		if(facingRight&&dCol) {
+			graphics.drawImage(ArtLoader.playerr1,x,y,w,h,null);	
+		}
+		if(facingRight&&!dCol) {
+			graphics.drawImage(ArtLoader.playerr2,x,y,w,h,null);
+		}
+		if(!facingRight&&dCol) {
+			graphics.drawImage(ArtLoader.playerl1,x,y,w,h,null);	
+		}
+		if(!facingRight&&!dCol) {
+			graphics.drawImage(ArtLoader.playerl2,x,y,w,h,null);
+		}
+		
 	}
 
 	
