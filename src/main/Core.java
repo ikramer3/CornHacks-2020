@@ -10,6 +10,7 @@ import res.ArtLoader;
 
 public class Core {
 	public static void main(String[] args) {
+
 		KeyWatcher kw = new KeyWatcher();
 		Canvas c= new Canvas();
 		c.addKeyListener(kw);
@@ -24,4 +25,4 @@ public class Core {
 		ArtLoader loader=new ArtLoader();
 		new Game(c,j,true,t,4);
 	}
-}
+
