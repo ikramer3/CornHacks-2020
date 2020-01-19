@@ -3,6 +3,7 @@ package main;
 import java.awt.Canvas;
 import java.awt.Color;
 import java.awt.Dimension;
+import java.awt.Font;
 import java.awt.Graphics;
 import java.awt.image.BufferStrategy;
 
@@ -27,7 +28,7 @@ public class Menu extends Canvas implements Runnable{
 	public static final int HEIGHT = WIDTH * 9/16;
 	public static int numOfSpendablePoints=0;
 	public static double gramsSaved = 0;
-	static int t=0;
+	static int t=0,m=20;
 
 	/*
 	 * OBJECTS
@@ -92,33 +93,17 @@ public class Menu extends Canvas implements Runnable{
 				300,
 				bigButtonWidth,
 				bigButtonHeight);
-		button1=new Button("Biked 1 Mi",
-				75,
-				300,
-				WIDTH/5,
-				HEIGHT/4);
-		button3=new Button("Biked 3 Mi", 
-				275, 
-				300, 
-				WIDTH/5, 
-				HEIGHT/4);
-		button5=new Button("Biked 5 Mi", 
-				475, 
-				300, 
-				WIDTH/5, 
-				HEIGHT/4);
-		button10=new Button("Biked 10 Mi",
-				675, 
-				300, 
-				WIDTH/5, 
-				HEIGHT/4);
 		noPlayButton=new Button("You do not have enough points to play", 
-				0, 
-				0, 
-				WIDTH, 
-				HEIGHT);
+				getCenter(bigButtonWidth), 
+				20, 
+				bigButtonWidth, 
+				bigButtonHeight);
 		al=new ArtLoader();
-		mw=new MouseWatcher(gameButton,dataButton,backButton,enterDataButton, button1, button3, button5, button10, noPlayButton);
+		mw=new MouseWatcher(gameButton,
+				dataButton,
+				backButton,
+				enterDataButton, 
+				noPlayButton);
 		kw = new KeyWatcher();
 		this.addMouseListener(mw);
 		this.addKeyListener(kw);
@@ -162,16 +147,18 @@ public class Menu extends Canvas implements Runnable{
 		}
 		if(appState==APP_STATE.DATA_ENTRY) {
 			backButton.draw(g, Color.red);
-			//			button1.draw(g, Color.blue);
-			//			button3.draw(g, Color.cyan);
-			//			button5.draw(g, Color.blue);
-			//			button10.draw(g, Color.cyan);
-
-			g.drawString("Please enter miles traveled", 100, 400);
+			Font f=new Font("calibri",1,20);
+			g.setFont(f);
+			g.drawString("Please enter in the format provided:", 100, 400);
+			g.drawString("distance,miles per gallon:", 100, 450);
 			String strMiles = kw.getInput();
-			if(!strMiles.isEmpty()) {
-				t=Integer.parseInt(strMiles);
-				g.drawString(String.format("%d",t), 100, 500);
+			if(!strMiles.isEmpty()) {				
+				String str=strMiles.split(",")[0];	
+				g.drawString(strMiles, 100, 475);
+				t=Integer.parseInt(str);
+				if(strMiles.split(",").length>1) {
+					m=Integer.parseInt(strMiles.split(",")[1]);	
+				}
 				System.out.println(strMiles);
 			}
 		
@@ -187,7 +174,7 @@ public class Menu extends Canvas implements Runnable{
 	}
 
 	public static void calcPointsWhenEnterPressed() {
-		points=new Points(20,t);
+		points=new Points(m,t);
 		numOfSpendablePoints += points.getPoints();
 		gramsSaved += points.getCarbonE();
 		Points.fileOutput(gramsSaved, 20, numOfSpendablePoints);

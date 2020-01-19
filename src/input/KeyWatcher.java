@@ -24,6 +24,7 @@ public class KeyWatcher implements KeyListener{
 		sevenDown,
 		eightDown,
 		nineDown,
+		commaDown,
 		enterDown;
 	
 	public KeyWatcher() {
@@ -43,6 +44,7 @@ public class KeyWatcher implements KeyListener{
 		eightDown=false;
 		nineDown=false;
 		enterDown=false;
+		commaDown=false;
 		sb.append("0");
 		
 	}
@@ -98,6 +100,9 @@ public class KeyWatcher implements KeyListener{
 		if(e.getKeyCode()==e.VK_ENTER) {
 			enterDown = true;
 		}
+		if(e.getKeyCode()==e.VK_COMMA) {
+			commaDown = true;
+		}
 		
 	}
 
@@ -150,65 +155,59 @@ public class KeyWatcher implements KeyListener{
 		if(e.getKeyCode()==e.VK_ENTER) {
 			enterDown=false;
 		}
+		if(e.getKeyCode()==e.VK_COMMA) {
+			commaDown = false;
+		}
 	}
 	public String getInput() {
 		if(oneDown) {
 			sb.append("1");
-			oneDown=false;
-			
+			oneDown=false;			
 		}
 		if(twoDown) {
 			sb.append("2");
-			twoDown=false;
-	
+			twoDown=false;	
 		}
 		if(threeDown) {
 			sb.append("3");
-			threeDown=false;
-	
+			threeDown=false;	
 		}
 		if(fourDown) {
 			sb.append("4");
-			fourDown=false;
-	
+			fourDown=false;	
 		}
 		if(fiveDown) {
 			sb.append("5");
-			fiveDown=false;
-	
+			fiveDown=false;	
 		}
 		if(sixDown) {
 			sb.append("6");
-			sixDown=false;
-	
+			sixDown=false;	
 		}
 		if(sevenDown) {
 			sb.append("7");
-			sevenDown=false;
-	
+			sevenDown=false;	
 		}
 		if(eightDown) {
 			sb.append("8");
 			eightDown=false;
-	
 		}
 		if(nineDown) {
 			sb.append("9");
-			nineDown=false;
-	
+			nineDown=false;	
 		}
 		if(zeroDown) {
 			sb.append("0");
-			zeroDown=false;
-	
-		}
-		
-		if(enterDown) {
-			
+			zeroDown=false;	
+		}		
+		if(enterDown) {			
 			resetInput();
 			Menu.appState=APP_STATE.MAIN_MENU;
 			Menu.calcPointsWhenEnterPressed();
-		
+		}
+		if(commaDown) {
+			sb.append(",");
+			commaDown=false;
 		}
 		return sb.toString();
 	}

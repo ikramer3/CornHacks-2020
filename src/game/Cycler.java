@@ -26,8 +26,7 @@ public class Cycler {
 	}
 	public void update() {
 		for(Meeple m:toBeRemoved) {
-			meeples.remove(m);
-			
+			meeples.remove(m);			
 		}
 		for(Meeple m:meeples) {
 			m.update();
@@ -46,8 +45,11 @@ public class Cycler {
 		}
 	}
 	public void spawn() {
-		if(enemyTimer%200==0) {
+		if(enemyTimer%175==0) {
 			addMeeple(MEEPLE_ID.FAST_TRASH,r.nextInt(Menu.WIDTH-64),50);
+		}
+		if(enemyTimer%300==0) {
+			addMeeple(MEEPLE_ID.LOW_TRASH,r.nextInt(Menu.WIDTH-64),50);
 		}
 		if(enemyTimer%600==50) {
 			addMeeple(MEEPLE_ID.RECYCLE_NINJA_STAR,r.nextInt(Menu.WIDTH-64),50);
@@ -58,7 +60,7 @@ public class Cycler {
 			if(m.getId()==MEEPLE_ID.LIZZIE) {
 				lizzieCollision(m);
 			}
-			if(m.getId()==MEEPLE_ID.FAST_TRASH) {
+			if(isEnemy(m.getId())){
 				enemyCollision(m);
 			}
 			if(m.getId()==MEEPLE_ID.RECYCLE_NINJA_STAR) {
@@ -86,7 +88,7 @@ public class Cycler {
 			m.setrCol(false);
 		}
 		for(Meeple m2:meeples) {
-			if(m2.getId()==MEEPLE_ID.FAST_TRASH) {
+			if(isEnemy(m2.getId())) {
 				if(collideCheck(m,m2)) {
 					Menu.appState=APP_STATE.MAIN_MENU;
 				}
@@ -107,13 +109,19 @@ public class Cycler {
 		}
 	}
 	public void enemyCollision(Meeple m){
+		int elevate=0;	
+		if(m.getId()==MEEPLE_ID.FAST_TRASH) {
+			elevate=140;
+		}else {
+			elevate=0;
+		}
 		if(m.getX()+m.getXv()<0) {
 			m.setXv(m.getSpeed());
 		}
 		if(m.getX()+m.getW()+m.getXv()>Menu.WIDTH) {
 			m.setXv(-m.getSpeed());
 		}
-		if(m.getY()+m.getYv()+m.getH()>groundHeight-100&&!m.isdCol()) {
+		if(m.getY()+m.getYv()+m.getH()>groundHeight-elevate&&!m.isdCol()) {
 			m.setYv(0);
 			m.setdCol(true);
 			m.setXv(m.getSpeed());
@@ -132,32 +140,12 @@ public class Cycler {
 			m.draw(graphics);
 		}
 	}
-//	public boolean twoObjectsTouching(Meeple m1,Meeple m2) {
-//		if(m1.getX()>m2.getX()&&m1.getX()<m2.getX()+m2.getW()) {
-//			if(m1.getY()>m2.getY()&&m1.getY()<m2.getY()+m2.getH()) {
-//				return true;
-//			}
-//			if(m1.getY()+m1.getH()>m2.getY()&&m1.getY()+m1.getH()<m2.getY()+m2.getH()) {
-//				return true;
-//			}
-//		}
-//		if(m1.getX()+m1.getW()>m2.getX()&&m1.getX()+m1.getW()<m2.getX()+m2.getW()) {
-//			if(m1.getY()>m2.getY()&&m1.getY()<m2.getY()+m2.getH()) {
-//				return true;
-//			}
-//			if(m1.getY()+m1.getH()>m2.getY()&&m1.getY()+m1.getH()<m2.getY()+m2.getH()) {
-//				return true;
-//			}
-//		}
-//		return false;
-//	}
-	
-//	public boolean collideCheck(Meeple m1,Meeple m2) {
-//		if(twoObjectsTouching(m1,m2)||twoObjectsTouching(m2,m1)) {
-//			return true;
-//		}
-//		return false;
-//	}
+	public boolean isEnemy(MEEPLE_ID id) {
+		if(id==MEEPLE_ID.FAST_TRASH||id==MEEPLE_ID.LOW_TRASH) {
+			return true;
+		}
+		return false;
+	}
 	public boolean collideCheck(Meeple m1,Meeple m2) {
 		if(m1.getRect().intersects(m2.getRect())) {
 			return true;
@@ -173,11 +161,13 @@ public class Cycler {
 		if(id==MEEPLE_ID.FAST_TRASH) {
 			m=new Baddie1(id,x,y);
 		}
+		if(id==MEEPLE_ID.LOW_TRASH) {
+			m=new Baddie2(id,x,y);
+		}
 		if(id==MEEPLE_ID.RECYCLE_NINJA_STAR) {
 			m=new RecycleBoi(id,x,y);
 		}
-		meeples.add(m);
-				
+		meeples.add(m);				
 	}
 	public void projectile() {
 		if(KeyWatcher.spaceKeyDown&&hasProjectile) {
@@ -188,7 +178,7 @@ public class Cycler {
 			}else {
 				spd=4;
 			}
-			Meeple projectile=new Projectile(MEEPLE_ID.RECYCLE_NINJA_STAR_ATTACK,player.getX(),player.getY(),spd);
+			Meeple projectile=new Projectile(MEEPLE_ID.RECYCLE_NINJA_STAR_ATTACK,player.getX(),player.getY()+player.getH()/2,spd);
 			meeples.add(projectile);
 			hasProjectile=false;
 		}

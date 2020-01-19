@@ -5,6 +5,7 @@ import java.awt.Color;
 import java.awt.Graphics;
 
 import main.Menu;
+import res.ArtLoader;
 
 public class Game {
 	
@@ -27,9 +28,8 @@ public class Game {
 		c.update();
 	}
 	public void draw(Graphics graphics) {
-		///DRAW HERE///		
-		graphics.setColor(Color.DARK_GRAY);
-		graphics.fillRect(0,0,Menu.WIDTH,Menu.HEIGHT);
+		///DRAW HERE///	
+		graphics.drawImage(ArtLoader.gameBit,0,0,Menu.WIDTH,Menu.HEIGHT,null);
 		c.draw(graphics);
 		///END DRAWING HERE///	
 	}

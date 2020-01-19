@@ -8,10 +8,10 @@ public class Points {
 	private int points;
 	private double distance;
 	private double carbonE;
-	private final double kgPerGallon = 8.8;
+	private double kgPerGallon = 8.8;
 	
 	public Points() {
-		mpg = 0;
+		mpg = 20;
 		points = 0;
 		distance = 0;
 	}
@@ -19,7 +19,9 @@ public class Points {
 	public Points (int mpg, double distance) {
 		this.mpg = mpg;
 		this.distance = distance;
-		carbonE = (double)kgPerGallon/mpg *distance * 1000;
+		System.out.printf("kgPerGallon:%f,mpg:%d distance:%f",kgPerGallon,this.mpg,distance);
+		carbonE = (kgPerGallon/this.mpg*distance*1000);
+		
 		points = (int) (Math.round(carbonE) / 50);
 	}
 	
@@ -31,9 +33,6 @@ public class Points {
 		return carbonE;
 	}
 	
-	public int getObjectMPG() {
-		return mpg;
-	}	
 	public String toString() {
 		return "You biked " + distance + "Miles and saved " +carbonE+ " g of carbon, getting " + points + "points";
 	}
@@ -64,7 +63,7 @@ public class Points {
 		int milesPerGallon;		
 		Scanner s = null;
 		try {
-			s=new Scanner(new File("C:\\Users\\asgoi\\OneDrive\\Documents\\CornHacks-2020\\src\\main\\gameData.txt"));
+			s=new Scanner(new File("gameData.txt"));
 		} catch (FileNotFoundException e) {
 			return -1;
 		}		

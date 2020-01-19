@@ -20,8 +20,6 @@ public class Player extends Meeple{
 		yv=0;
 		rect=new Rectangle(x,y,w,h);
 	}
-
-
 	public void update() {	
 		move();
 		rect.x=x;
@@ -81,7 +79,7 @@ public class Player extends Meeple{
 		}
 		if(dCol) {
 			if(KeyWatcher.upKeyDown) {
-				yv=-14;
+				yv=-18;
 				dCol=false;
 			}
 		}else {

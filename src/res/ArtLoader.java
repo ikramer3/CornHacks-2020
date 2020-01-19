@@ -9,6 +9,7 @@ public class ArtLoader {
 	
 	public static BufferedImage art,
 		mainMenuBit,
+		gameBit,
 		playerl1,
 		playerl2,
 		playerr1,
@@ -17,13 +18,16 @@ public class ArtLoader {
 		recycle2,
 		recycle3,
 		m11,
-		m12;
+		m12,
+		m21,
+		m22;
 	int imgD=64;
 	
 	public ArtLoader() {
 		initArt();
 	}
 	public void initArt() {
+		gameBit=getImageFromPNG("gameBackGround.png");
 		mainMenuBit=getImageFromPNG("MainMenuBit.jpg");
 		art=getImageFromPNG("spriteSheet.png");
 		playerl1=crop(0*imgD,0*imgD,imgD,imgD,art);
@@ -35,6 +39,8 @@ public class ArtLoader {
 		recycle3=crop(2*imgD,2*imgD,imgD,imgD,art);
 		m11=crop(2*imgD,0*imgD,imgD,imgD,art);
 		m12=crop(2*imgD,1*imgD,imgD,imgD,art);
+		m21=crop(3*imgD,0*imgD,imgD,imgD,art);
+		m22=crop(3*imgD,1*imgD,imgD,imgD,art);
 
 	}
 	
