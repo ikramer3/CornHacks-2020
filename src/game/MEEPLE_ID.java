@@ -2,6 +2,7 @@ package game;
 
 public enum MEEPLE_ID {
 	LIZZIE,
+	RECYCLE_NINJA_STAR,
 	SLOW_TRASH,
 	FAST_TRASH,
 	SMOG,

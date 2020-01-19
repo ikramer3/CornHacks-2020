@@ -43,6 +43,7 @@ public class MouseWatcher implements MouseListener{
 				}
 			} else if(mouseClickInsideButton(e, dataButton)) {
 				Menu.appState=APP_STATE.DATA_ENTRY;
+				KeyWatcher.resetInput();
 			}
 		}else if(Menu.appState==APP_STATE.DATA_ENTRY) {
 			if(mouseClickInsideButton(e,backButton)) {
@@ -52,6 +53,7 @@ public class MouseWatcher implements MouseListener{
 				Menu.numOfSpendablePoints += points.getPoints();
 				Menu.gramsSaved += points.getCarbonE();
 				Points.fileOutput(Menu.gramsSaved, points.getObjectMPG(), Menu.numOfSpendablePoints);
+			
 				
 
 				Menu.appState=APP_STATE.MAIN_MENU;
@@ -78,6 +80,7 @@ public class MouseWatcher implements MouseListener{
 				Menu.appState = APP_STATE.MAIN_MENU;
 			}
 		}
+		
 
 	}
 	public boolean mouseClickInsideButton(MouseEvent e,Button b) {
@@ -87,6 +90,9 @@ public class MouseWatcher implements MouseListener{
 			}
 		}
 		return false;
+	}
+	public String getInput() {
+		return "sdfsd";
 	}
 
 
@@ -108,4 +114,5 @@ public class MouseWatcher implements MouseListener{
 		// TODO Auto-generated method stub
 
 	}
+
 }

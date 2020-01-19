@@ -22,7 +22,6 @@ public class Player extends Meeple{
 
 
 	public void update() {	
-		System.out.printf("x: %d, y: %d\n",x,y);
 		move();
 	}
 	public void draw(Graphics graphics) {

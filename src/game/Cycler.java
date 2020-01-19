@@ -2,18 +2,25 @@ package game;
 
 import java.awt.Graphics;
 import java.util.ArrayList;
+import java.util.Random;
 
+import main.APP_STATE;
 import main.Menu;
 
 public class Cycler {
 	
+
 	public static int timer=0;
+	public int enemyTimer=0;
 	int groundHeight=550;
+	
+	Random r;
 	ArrayList<Meeple> meeples=new ArrayList<>();
 	
 	public Cycler() {
+		r=new Random();
 		addMeeple(MEEPLE_ID.LIZZIE,20,20);
-		addMeeple(MEEPLE_ID.FAST_TRASH,50,50);
+		
 
 	}
 	public void update() {
@@ -22,12 +29,22 @@ public class Cycler {
 		}
 		collision();
 		timer();
+		spawn();
 	}
 	public void timer() {
+		enemyTimer++;
 		if(timer==0) {
 			timer=20;
 		}else {
 			timer--;
+		}
+	}
+	public void spawn() {
+		if(enemyTimer%200==0) {
+			addMeeple(MEEPLE_ID.FAST_TRASH,r.nextInt(Menu.WIDTH-64),50);
+		}
+		if(enemyTimer%600==50) {
+			addMeeple(MEEPLE_ID.RECYCLE_NINJA_STAR,r.nextInt(Menu.WIDTH-64),50);
 		}
 	}
 	public void collision() {
@@ -62,7 +79,7 @@ public class Cycler {
 		for(Meeple m2:meeples) {
 			if(m2.getId()==MEEPLE_ID.FAST_TRASH) {
 				if(collideCheck(m,m2)) {
-					System.out.println("them touching\n");
+					Menu.appState=APP_STATE.MAIN_MENU;
 				}
 			}
 		}
@@ -106,7 +123,7 @@ public class Cycler {
 
 	}
 	public boolean collideCheck(Meeple m1,Meeple m2) {
-		if(twoObjectsTouching(m1,m2)||twoObjectsTouching(m1,m2)) {
+		if(twoObjectsTouching(m1,m2)||twoObjectsTouching(m2,m2)) {
 			return true;
 		}
 		return false;
@@ -118,6 +135,9 @@ public class Cycler {
 		}
 		if(id==MEEPLE_ID.FAST_TRASH) {
 			m=new Baddie1(id,x,y);
+		}
+		if(id==MEEPLE_ID.RECYCLE_NINJA_STAR) {
+			m=new RecycleBoi(id,x,y);
 		}
 		meeples.add(m);
 				

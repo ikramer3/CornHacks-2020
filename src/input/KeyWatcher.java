@@ -4,8 +4,22 @@ import java.awt.event.KeyEvent;
 import java.awt.event.KeyListener;
 
 public class KeyWatcher implements KeyListener{
+	static StringBuilder sb=new StringBuilder();
 	
-	public static boolean leftKeyDown,rightKeyDown,upKeyDown,downKeyDown,spaceKeyDown;
+	public static boolean leftKeyDown,
+		rightKeyDown,
+		upKeyDown,
+		downKeyDown,
+		spaceKeyDown,
+		oneDown,
+		twoDown,
+		threeDown,
+		fourDown,
+		fiveDown,
+		sixDown,
+		sevenDown,
+		eightDown,
+		nineDown;
 	
 	public KeyWatcher() {
 		leftKeyDown=false;
@@ -13,6 +27,16 @@ public class KeyWatcher implements KeyListener{
 		upKeyDown=false;
 		downKeyDown=false;
 		spaceKeyDown=false;
+		oneDown=false;
+		twoDown=false;
+		threeDown=false;
+		fourDown=false;
+		fiveDown=false;
+		sixDown=false;
+		sevenDown=false;
+		eightDown=false;
+		nineDown=false;
+		
 	}
 
 	public void keyTyped(KeyEvent e) {}
@@ -33,6 +57,9 @@ public class KeyWatcher implements KeyListener{
 		if(e.getKeyCode()==e.VK_SPACE) {
 			spaceKeyDown=true;
 		}
+		if(e.getKeyCode()==e.VK_1) {
+			oneDown=true;
+		}
 		
 	}
 
@@ -52,6 +79,18 @@ public class KeyWatcher implements KeyListener{
 		if(e.getKeyCode()==e.VK_SPACE) {
 			spaceKeyDown=false;
 		}
+		if(e.getKeyCode()==e.VK_1) {
+			oneDown=false;
+		}
+	}
+	public String getInput() {
+		if(oneDown) {
+			sb.append("1");
+		}
+		return sb.toString();
+	}
+	public static void resetInput() {
+		sb=new StringBuilder();
 	}
 	
 }

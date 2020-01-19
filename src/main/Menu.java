@@ -161,10 +161,11 @@ public class Menu extends Canvas implements Runnable{
 		}
 		if(appState==APP_STATE.DATA_ENTRY) {
 			backButton.draw(g, Color.red);
-			button1.draw(g, Color.blue);
-			button3.draw(g, Color.cyan);
-			button5.draw(g, Color.blue);
-			button10.draw(g, Color.cyan);
+//			button1.draw(g, Color.blue);
+//			button3.draw(g, Color.cyan);
+//			button5.draw(g, Color.blue);
+//			button10.draw(g, Color.cyan);
+			g.drawString(kw.getInput(),100,100);
 		}
 		if(appState==APP_STATE.GAME_TEE_HEE) {
 			
@@ -185,7 +186,7 @@ public class Menu extends Canvas implements Runnable{
 			game.update();
 		}
 		if(appState == APP_STATE.NO_PLAY) {
-			;
+			
 		}
 	}
 	public void pause() {
