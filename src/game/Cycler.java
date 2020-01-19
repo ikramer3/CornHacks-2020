@@ -4,6 +4,7 @@ import java.awt.Graphics;
 import java.util.ArrayList;
 import java.util.Random;
 
+import input.KeyWatcher;
 import main.APP_STATE;
 import main.Menu;
 
@@ -13,23 +14,28 @@ public class Cycler {
 	public static int timer=0;
 	public int enemyTimer=0;
 	int groundHeight=550;
+	boolean hasProjectile=false;
 	
 	Random r;
+	ArrayList<Meeple>toBeRemoved=new ArrayList<>();
 	ArrayList<Meeple> meeples=new ArrayList<>();
 	
 	public Cycler() {
 		r=new Random();
 		addMeeple(MEEPLE_ID.LIZZIE,20,20);
-		
-
 	}
 	public void update() {
+		for(Meeple m:toBeRemoved) {
+			meeples.remove(m);
+			
+		}
 		for(Meeple m:meeples) {
 			m.update();
 		}
 		collision();
 		timer();
 		spawn();
+		projectile();
 	}
 	public void timer() {
 		enemyTimer++;
@@ -54,6 +60,9 @@ public class Cycler {
 			}
 			if(m.getId()==MEEPLE_ID.FAST_TRASH) {
 				enemyCollision(m);
+			}
+			if(m.getId()==MEEPLE_ID.RECYCLE_NINJA_STAR) {
+				RecycleCollision(m);
 			}
 		}
 	}
@@ -82,6 +91,19 @@ public class Cycler {
 					Menu.appState=APP_STATE.MAIN_MENU;
 				}
 			}
+			if(m2.getId()==MEEPLE_ID.RECYCLE_NINJA_STAR) {
+				if(collideCheck(m,m2)&&!hasProjectile){
+					System.out.println("sdfsdf");
+					hasProjectile=true;
+					toBeRemoved.add(m2);
+				}
+			}
+		}
+	}
+	public void RecycleCollision(Meeple m) {
+		if(m.getY()+m.getYv()+m.getH()>groundHeight&&!m.isdCol()) {
+			m.setYv(0);
+			m.setdCol(true);
 		}
 	}
 	public void enemyCollision(Meeple m){
@@ -91,42 +113,57 @@ public class Cycler {
 		if(m.getX()+m.getW()+m.getXv()>Menu.WIDTH) {
 			m.setXv(-m.getSpeed());
 		}
-		if(m.getY()+m.getYv()+m.getH()>groundHeight&&!m.isdCol()) {
+		if(m.getY()+m.getYv()+m.getH()>groundHeight-100&&!m.isdCol()) {
 			m.setYv(0);
 			m.setdCol(true);
 			m.setXv(m.getSpeed());
 		}
+		for(Meeple m2:meeples) {
+			if(m2.getId()==MEEPLE_ID.RECYCLE_NINJA_STAR_ATTACK) {
+				if(collideCheck(m,m2)) {
+					toBeRemoved.add(m);
+				}
+			}
+		}
+		
 	}
 	public void draw(Graphics graphics) {
 		for(Meeple m:meeples) {
 			m.draw(graphics);
 		}
 	}
-	public boolean twoObjectsTouching(Meeple m1,Meeple m2) {
-		if(m1.getX()>m2.getX()&&m1.getX()<m2.getX()+m2.getW()) {
-			if(m1.getY()>m2.getY()&&m1.getY()<m2.getY()+m2.getH()) {
-				return true;
-			}
-			if(m1.getY()+m1.getH()>m2.getY()&&m1.getY()+m1.getH()<m2.getY()+m2.getH()) {
-				return true;
-			}
-		}
-		if(m1.getX()+m1.getW()>m2.getX()&&m1.getX()+m1.getW()<m2.getX()+m2.getW()) {
-			if(m1.getY()>m2.getY()&&m1.getY()<m2.getY()+m2.getH()) {
-				return true;
-			}
-			if(m1.getY()+m1.getH()>m2.getY()&&m1.getY()+m1.getH()<m2.getY()+m2.getH()) {
-				return true;
-			}
-		}
-		return false;
-
-	}
+//	public boolean twoObjectsTouching(Meeple m1,Meeple m2) {
+//		if(m1.getX()>m2.getX()&&m1.getX()<m2.getX()+m2.getW()) {
+//			if(m1.getY()>m2.getY()&&m1.getY()<m2.getY()+m2.getH()) {
+//				return true;
+//			}
+//			if(m1.getY()+m1.getH()>m2.getY()&&m1.getY()+m1.getH()<m2.getY()+m2.getH()) {
+//				return true;
+//			}
+//		}
+//		if(m1.getX()+m1.getW()>m2.getX()&&m1.getX()+m1.getW()<m2.getX()+m2.getW()) {
+//			if(m1.getY()>m2.getY()&&m1.getY()<m2.getY()+m2.getH()) {
+//				return true;
+//			}
+//			if(m1.getY()+m1.getH()>m2.getY()&&m1.getY()+m1.getH()<m2.getY()+m2.getH()) {
+//				return true;
+//			}
+//		}
+//		return false;
+//	}
+	
+//	public boolean collideCheck(Meeple m1,Meeple m2) {
+//		if(twoObjectsTouching(m1,m2)||twoObjectsTouching(m2,m1)) {
+//			return true;
+//		}
+//		return false;
+//	}
 	public boolean collideCheck(Meeple m1,Meeple m2) {
-		if(twoObjectsTouching(m1,m2)||twoObjectsTouching(m2,m2)) {
+		if(m1.getRect().intersects(m2.getRect())) {
 			return true;
+		}else {
+			return false;
 		}
-		return false;
 	}
 	public void addMeeple(MEEPLE_ID id,int x,int y) {
 		Meeple m=null;
@@ -141,5 +178,27 @@ public class Cycler {
 		}
 		meeples.add(m);
 				
+	}
+	public void projectile() {
+		if(KeyWatcher.spaceKeyDown&&hasProjectile) {
+			Player player=(Player)getMeepleOfID(MEEPLE_ID.LIZZIE);
+			int spd=0;
+			if(!player.getDir()) {
+				spd=-5;
+			}else {
+				spd=4;
+			}
+			Meeple projectile=new Projectile(MEEPLE_ID.RECYCLE_NINJA_STAR_ATTACK,player.getX(),player.getY(),spd);
+			meeples.add(projectile);
+			hasProjectile=false;
+		}
+	}
+	public Meeple getMeepleOfID(MEEPLE_ID id) {
+		for(Meeple m:meeples) {
+			if(m.getId()==id) {
+				return m;
+			}
+		}
+		return null;
 	}
 }

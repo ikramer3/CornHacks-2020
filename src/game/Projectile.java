@@ -6,30 +6,29 @@ import java.awt.Rectangle;
 
 import res.ArtLoader;
 
-public class RecycleBoi extends Meeple{
+public class Projectile extends Meeple{
 
-	public RecycleBoi(MEEPLE_ID id, int x, int y) {
+	public Projectile(MEEPLE_ID id, int x, int y,int xv) {
 		super(id, x, y);
+		this.xv=xv;
 		init();
 	}
 
-	
+
 	public void init() {
-		w=32;
-		h=32;
-		yv=5;
+		w=16;
+		h=16;	
 		rect=new Rectangle(x,y,w,h);
 
-		
 	}
 
-	@Override
+	
 	public void update() {
-		y+=yv;
+		x+=xv;		
 		rect.x=x;
 		rect.y=y;
-		
 	}
+
 	public void draw(Graphics graphics) {
 		if(Cycler.timer>14){
 			graphics.drawImage(ArtLoader.recycle1, x, y, w, h, null);
@@ -40,7 +39,6 @@ public class RecycleBoi extends Meeple{
 		if(Cycler.timer<=7){
 			graphics.drawImage(ArtLoader.recycle3, x, y, w, h, null);
 		}
-			
 		
 	}
 

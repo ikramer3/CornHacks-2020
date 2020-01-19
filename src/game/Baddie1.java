@@ -2,6 +2,9 @@ package game;
 
 import java.awt.Color;
 import java.awt.Graphics;
+import java.awt.Rectangle;
+
+import res.ArtLoader;
 
 public class Baddie1 extends Meeple{
 
@@ -17,18 +20,24 @@ public class Baddie1 extends Meeple{
 		h=64;
 		xv=0;
 		y+=yv;
+		rect=new Rectangle(x,y,w,h);
+
 		
 	}
 	public void update() {
 		x+=xv;		
 		y+=yv;
+		rect.x=x;
+		rect.y=y;
 	}
 
 	@Override
 	public void draw(Graphics graphics) {
-		graphics.setColor(Color.BLACK);
-		graphics.fillRect(x,y,w,h);
-		
+		if(Cycler.timer>10) {
+			graphics.drawImage(ArtLoader.m11,x,y,w,h,null);	
+		}else {
+			graphics.drawImage(ArtLoader.m12,x,y,w,h,null);	
+		}		
 		
 	}
 

@@ -1,11 +1,12 @@
 package game;
 
 import java.awt.Graphics;
+import java.awt.Rectangle;
 
 public abstract class Meeple{
 	///FIELDS///
 	protected int x,y,w,h,xv,yv,speed;
-
+	protected Rectangle rect;
 	protected boolean lCol,rCol,uCol,dCol;
 	protected MEEPLE_ID id;
 
@@ -113,6 +114,12 @@ public abstract class Meeple{
 	}
 	public void setSpeed(int speed) {
 		this.speed = speed;
+	}
+	public Rectangle getRect() {
+		return rect;
+	}
+	public void setRect(Rectangle rect) {
+		this.rect = rect;
 	}
 
 

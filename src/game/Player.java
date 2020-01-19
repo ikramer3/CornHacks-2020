@@ -1,7 +1,7 @@
 package game;
 
-import java.awt.Color;
 import java.awt.Graphics;
+import java.awt.Rectangle;
 
 import input.KeyWatcher;
 import res.ArtLoader;
@@ -18,11 +18,14 @@ public class Player extends Meeple{
 		h=64;
 		xv=0;
 		yv=0;
+		rect=new Rectangle(x,y,w,h);
 	}
 
 
 	public void update() {	
 		move();
+		rect.x=x;
+		rect.y=y;
 	}
 	public void draw(Graphics graphics) {
 		if(xv==0&&dCol) {
@@ -89,6 +92,9 @@ public class Player extends Meeple{
 		}
 		x+=xv;
 		y+=yv;
+	}
+	public boolean getDir() {
+		return facingRight;
 	}
 
 

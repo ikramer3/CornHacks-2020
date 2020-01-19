@@ -12,7 +12,12 @@ public class ArtLoader {
 		playerl1,
 		playerl2,
 		playerr1,
-		playerr2;
+		playerr2,
+		recycle1,
+		recycle2,
+		recycle3,
+		m11,
+		m12;
 	int imgD=64;
 	
 	public ArtLoader() {
@@ -25,6 +30,12 @@ public class ArtLoader {
 		playerl2=crop(0*imgD,1*imgD,imgD,imgD,art);
 		playerr1=crop(1*imgD,0*imgD,imgD,imgD,art);
 		playerr2=crop(1*imgD,1*imgD,imgD,imgD,art);
+		recycle1=crop(0*imgD,2*imgD,imgD,imgD,art);
+		recycle2=crop(1*imgD,2*imgD,imgD,imgD,art);
+		recycle3=crop(2*imgD,2*imgD,imgD,imgD,art);
+		m11=crop(2*imgD,0*imgD,imgD,imgD,art);
+		m12=crop(2*imgD,1*imgD,imgD,imgD,art);
+
 	}
 	
 	public BufferedImage crop(int x,int y,int w,int h,BufferedImage image) {
