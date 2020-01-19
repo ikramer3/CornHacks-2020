@@ -3,6 +3,8 @@ package game;
 import java.awt.Graphics;
 import java.util.ArrayList;
 
+import main.Menu;
+
 public class Cycler {
 	
 	public static int timer=0;
@@ -51,18 +53,25 @@ public class Cycler {
 		}else {
 			m.setlCol(false);
 		}
-		if(m.getX()+m.getW()+m.getXv()>640) {
+		if(m.getX()+m.getW()+m.getXv()>Menu.WIDTH) {
 			m.setrCol(true);
 			m.setXv(-1);
 		}else {
 			m.setrCol(false);
+		}
+		for(Meeple m2:meeples) {
+			if(m2.getId()==MEEPLE_ID.FAST_TRASH) {
+				if(collideCheck(m,m2)) {
+					System.out.println("them touching\n");
+				}
+			}
 		}
 	}
 	public void enemyCollision(Meeple m){
 		if(m.getX()+m.getXv()<0) {
 			m.setXv(m.getSpeed());
 		}
-		if(m.getX()+m.getW()+m.getXv()>640) {
+		if(m.getX()+m.getW()+m.getXv()>Menu.WIDTH) {
 			m.setXv(-m.getSpeed());
 		}
 		if(m.getY()+m.getYv()+m.getH()>groundHeight&&!m.isdCol()) {
@@ -75,6 +84,32 @@ public class Cycler {
 		for(Meeple m:meeples) {
 			m.draw(graphics);
 		}
+	}
+	public boolean twoObjectsTouching(Meeple m1,Meeple m2) {
+		if(m1.getX()>m2.getX()&&m1.getX()<m2.getX()+m2.getW()) {
+			if(m1.getY()>m2.getY()&&m1.getY()<m2.getY()+m2.getH()) {
+				return true;
+			}
+			if(m1.getY()+m1.getH()>m2.getY()&&m1.getY()+m1.getH()<m2.getY()+m2.getH()) {
+				return true;
+			}
+		}
+		if(m1.getX()+m1.getW()>m2.getX()&&m1.getX()+m1.getW()<m2.getX()+m2.getW()) {
+			if(m1.getY()>m2.getY()&&m1.getY()<m2.getY()+m2.getH()) {
+				return true;
+			}
+			if(m1.getY()+m1.getH()>m2.getY()&&m1.getY()+m1.getH()<m2.getY()+m2.getH()) {
+				return true;
+			}
+		}
+		return false;
+
+	}
+	public boolean collideCheck(Meeple m1,Meeple m2) {
+		if(twoObjectsTouching(m1,m2)||twoObjectsTouching(m1,m2)) {
+			return true;
+		}
+		return false;
 	}
 	public void addMeeple(MEEPLE_ID id,int x,int y) {
 		Meeple m=null;

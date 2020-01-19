@@ -61,7 +61,6 @@ public class MouseWatcher implements MouseListener{
 				Menu.numOfSpendablePoints += points.getPoints();
 				Menu.gramsSaved += points.getCarbonE();
 				Points.fileOutput(Menu.gramsSaved, points.getObjectMPG(), Menu.numOfSpendablePoints);
-
 				Menu.appState=APP_STATE.MAIN_MENU;
 			}
 			else if(mouseClickInsideButton(e, button5)) {
@@ -69,7 +68,6 @@ public class MouseWatcher implements MouseListener{
 				Menu.numOfSpendablePoints += points.getPoints();
 				Menu.gramsSaved += points.getCarbonE();
 				Points.fileOutput(Menu.gramsSaved, points.getObjectMPG(), Menu.numOfSpendablePoints);
-
 				Menu.appState = APP_STATE.MAIN_MENU;
 			}
 			else if(mouseClickInsideButton(e, button10)) {
@@ -77,7 +75,6 @@ public class MouseWatcher implements MouseListener{
 				Menu.numOfSpendablePoints += points.getPoints();
 				Menu.gramsSaved += points.getCarbonE();
 				Points.fileOutput(Menu.gramsSaved, points.getObjectMPG(), Menu.numOfSpendablePoints);
-
 				Menu.appState = APP_STATE.MAIN_MENU;
 			}
 		}

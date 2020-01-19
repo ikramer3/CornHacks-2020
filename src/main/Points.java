@@ -33,8 +33,7 @@ public class Points {
 	
 	public int getObjectMPG() {
 		return mpg;
-	}
-	
+	}	
 	public String toString() {
 		return "You biked " + distance + "Miles and saved " +carbonE+ " g of carbon, getting " + points + "points";
 	}
@@ -43,22 +42,17 @@ public class Points {
 	 * getEmmission reads the game file and returns the number that represents the emissions ( the first line of the file)
 	 */
 	public static double getEmissions() {
-		double carbonEmissionTotal;
-		
+		double carbonEmissionTotal;		
 		Scanner s = null;
 		try {
 			s=new Scanner(new File("gameData.txt"));
 		} catch (FileNotFoundException e) {
 			return -1;
-		}
-		
-		String line;
-		
+		}		
+		String line;		
 		line = s.nextLine();
-		carbonEmissionTotal = Double.parseDouble(line);
-		
-		s.close();
-		
+		carbonEmissionTotal = Double.parseDouble(line);		
+		s.close();		
 		return carbonEmissionTotal;
 		
 	}
@@ -67,25 +61,20 @@ public class Points {
 	 * getMPG reads the game file and returns the number that represents the miles per gallon( the second line of the file)
 	 */
 	public static int getMPG() {
-		int milesPerGallon;
-		
+		int milesPerGallon;		
 		Scanner s = null;
 		try {
 			s=new Scanner(new File("C:\\Users\\asgoi\\OneDrive\\Documents\\CornHacks-2020\\src\\main\\gameData.txt"));
 		} catch (FileNotFoundException e) {
 			return -1;
-		}
-		
-		String line;
-		
+		}		
+		String line;		
 		for(int i=0; i<1; i++) {
 			s.nextLine();
 		}
 		line = s.nextLine();
-		milesPerGallon = Integer.parseInt(line);
-		
-		s.close();
-		
+		milesPerGallon = Integer.parseInt(line);		
+		s.close();		
 		return milesPerGallon;
 	}
 	
@@ -93,50 +82,41 @@ public class Points {
 	 * getEmmission reads the game file and returns the number that represents the totalPoints ( the third line of the file)
 	 */
 	public static int getTotalPoints() {
-		int totalPoints;
-		
+		int totalPoints;		
 		Scanner s = null;
 		try {
 			s=new Scanner(new File("C:\\Users\\asgoi\\OneDrive\\Documents\\CornHacks-2020\\src\\main\\gameData.txt"));
 		} catch (FileNotFoundException e) {
 			return -1;
-		}
-		
-		String line;
-		
+		}		
+		String line;		
 		for(int i =0; i<2; i++) {
 			s.nextLine();
-		}
-		
+		}		
 		line = s.nextLine();
 		totalPoints = Integer.parseInt(line);
-		s.close();
-		
+		s.close();		
 		return totalPoints;
 		
 	}
 	
-	public static void fileOutput(double emissions, int mpg, int point) {
-		
+	public static void fileOutput(double emissions, int mpg, int point) {		
 		PrintWriter pw = null;
 		try {
 			pw = new PrintWriter(new File("gameData.txt"));
 		} catch(FileNotFoundException fnfe) {
 			throw new RuntimeException(fnfe);
-		}
-		
+		}		
 		pw.println(emissions);
 		pw.println(mpg);
-		pw.println(point);
-		
+		pw.println(point);		
 		pw.close();
 
 	}
 	
 	public int addPointsToTotal() {
 		int previousPoints = getTotalPoints();
-		int newPoints = previousPoints + points;
-		
+		int newPoints = previousPoints + points;		
 		return newPoints;
 	}
 	

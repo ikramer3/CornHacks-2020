@@ -7,9 +7,14 @@ import javax.imageio.ImageIO;
 
 public class ArtLoader {
 	
-	BufferedImage art,mainMenuBit;
-	public static BufferedImage playerl1,playerl2,playerr1,playerr2;
+	public static BufferedImage art,
+		mainMenuBit,
+		playerl1,
+		playerl2,
+		playerr1,
+		playerr2;
 	int imgD=64;
+	
 	public ArtLoader() {
 		initArt();
 	}

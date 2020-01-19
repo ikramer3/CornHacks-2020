@@ -4,10 +4,9 @@ import javax.swing.JFrame;
 
 public class GameWindow {
 
-	public GameWindow(Menu menu) {
+	public GameWindow(Menu menu,JFrame frame) {
 		
-		JFrame frame = new JFrame("Bike Green");
-		
+		frame = new JFrame("GREEN GECKO");		
 		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		frame.setVisible(true);
 		frame.add(menu);

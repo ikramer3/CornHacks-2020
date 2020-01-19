@@ -15,10 +15,7 @@ public class KeyWatcher implements KeyListener{
 		spaceKeyDown=false;
 	}
 
-	public void keyTyped(KeyEvent e) {
-		
-		
-	}
+	public void keyTyped(KeyEvent e) {}
 
 	public void keyPressed(KeyEvent e) {
 		if(e.getKeyCode()==e.VK_UP) {
