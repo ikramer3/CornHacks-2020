@@ -85,7 +85,7 @@ public class Points {
 		int totalPoints;		
 		Scanner s = null;
 		try {
-			s=new Scanner(new File("C:\\Users\\asgoi\\OneDrive\\Documents\\CornHacks-2020\\src\\main\\gameData.txt"));
+			s=new Scanner(new File("gameData.txt"));
 		} catch (FileNotFoundException e) {
 			return -1;
 		}		

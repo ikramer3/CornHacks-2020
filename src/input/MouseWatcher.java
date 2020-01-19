@@ -49,35 +49,35 @@ public class MouseWatcher implements MouseListener{
 			if(mouseClickInsideButton(e,backButton)) {
 				Menu.appState=APP_STATE.MAIN_MENU;
 			} else if(mouseClickInsideButton(e, button1)) {
-				Points points = new Points(20,5);
-				Menu.numOfSpendablePoints += points.getPoints();
-				Menu.gramsSaved += points.getCarbonE();
-				Points.fileOutput(Menu.gramsSaved, points.getObjectMPG(), Menu.numOfSpendablePoints);
-			
-				
-
-				Menu.appState=APP_STATE.MAIN_MENU;
+//				Points points = new Points(20,5);
+//				Menu.numOfSpendablePoints += points.getPoints();
+//				Menu.gramsSaved += points.getCarbonE();
+//				Points.fileOutput(Menu.gramsSaved, points.getObjectMPG(), Menu.numOfSpendablePoints);
+//			
+//				
+//
+//				Menu.appState=APP_STATE.MAIN_MENU;
 			}
 			else if(mouseClickInsideButton(e, button3)) {
-				Points points = new Points(20, 3);
-				Menu.numOfSpendablePoints += points.getPoints();
-				Menu.gramsSaved += points.getCarbonE();
-				Points.fileOutput(Menu.gramsSaved, points.getObjectMPG(), Menu.numOfSpendablePoints);
-				Menu.appState=APP_STATE.MAIN_MENU;
+//				Points points = new Points(20, 3);
+//				Menu.numOfSpendablePoints += points.getPoints();
+//				Menu.gramsSaved += points.getCarbonE();
+//				Points.fileOutput(Menu.gramsSaved, points.getObjectMPG(), Menu.numOfSpendablePoints);
+//				Menu.appState=APP_STATE.MAIN_MENU;
 			}
 			else if(mouseClickInsideButton(e, button5)) {
-				Points points = new Points(20,5);
-				Menu.numOfSpendablePoints += points.getPoints();
-				Menu.gramsSaved += points.getCarbonE();
-				Points.fileOutput(Menu.gramsSaved, points.getObjectMPG(), Menu.numOfSpendablePoints);
-				Menu.appState = APP_STATE.MAIN_MENU;
+//				Points points = new Points(20,5);
+//				Menu.numOfSpendablePoints += points.getPoints();
+//				Menu.gramsSaved += points.getCarbonE();
+//				Points.fileOutput(Menu.gramsSaved, points.getObjectMPG(), Menu.numOfSpendablePoints);
+//				Menu.appState = APP_STATE.MAIN_MENU;
 			}
 			else if(mouseClickInsideButton(e, button10)) {
-				Points points = new Points(20, 10);
-				Menu.numOfSpendablePoints += points.getPoints();
-				Menu.gramsSaved += points.getCarbonE();
-				Points.fileOutput(Menu.gramsSaved, points.getObjectMPG(), Menu.numOfSpendablePoints);
-				Menu.appState = APP_STATE.MAIN_MENU;
+//				Points points = new Points(20, 10);
+//				Menu.numOfSpendablePoints += points.getPoints();
+//				Menu.gramsSaved += points.getCarbonE();
+//				Points.fileOutput(Menu.gramsSaved, points.getObjectMPG(), Menu.numOfSpendablePoints);
+//				Menu.appState = APP_STATE.MAIN_MENU;
 			}
 		}
 		

@@ -15,7 +15,7 @@ import input.MouseWatcher;
 import res.ArtLoader;
 
 public class Menu extends Canvas implements Runnable{
-	
+
 	/*
 	 * STATIC VALUES* 
 	 * 
@@ -27,30 +27,31 @@ public class Menu extends Canvas implements Runnable{
 	public static final int HEIGHT = WIDTH * 9/16;
 	public static int numOfSpendablePoints=0;
 	public static double gramsSaved = 0;
-	
+	static int t=0;
+
 	/*
 	 * OBJECTS
 	 */
-	
+
 	JFrame jf;
 	MouseWatcher mw;
 	KeyWatcher kw;
 	Button gameButton,
-		dataButton,
-		backButton,
-		enterDataButton,
-		button1,
-		button3,
-		button5,
-		button10,
-		noPlayButton;
-	Points points;
-	
+	dataButton,
+	backButton,
+	enterDataButton,
+	button1,
+	button3,
+	button5,
+	button10,
+	noPlayButton;
+	static Points points;
+
 	Thread thread;
 	ArtLoader al;
 	public static Game game;	
 	private boolean active = true;
-	
+
 	int bigButtonWidth=WIDTH/3;
 	int bigButtonHeight=HEIGHT/4;
 	int medButtonWidth=WIDTH/5;
@@ -70,52 +71,52 @@ public class Menu extends Canvas implements Runnable{
 		thread=new Thread(this);
 		thread.start();
 	}
-	
+
 	public void init() {
 		gameButton=new Button("START GAME",
-					WIDTH-bigButtonWidth,
-					100,
-					bigButtonWidth,
-					bigButtonHeight);
+				WIDTH-bigButtonWidth,
+				100,
+				bigButtonWidth,
+				bigButtonHeight);
 		dataButton=new Button("ENTER MILES",
-					WIDTH-bigButtonWidth,
-					300, 
-					bigButtonWidth,
-					bigButtonHeight);
+				WIDTH-bigButtonWidth,
+				300, 
+				bigButtonWidth,
+				bigButtonHeight);
 		backButton=new Button("BACK",
-					getCenter(bigButtonWidth),
-					100,
-					bigButtonWidth,
-					bigButtonHeight);
+				getCenter(bigButtonWidth),
+				100,
+				bigButtonWidth,
+				bigButtonHeight);
 		enterDataButton=new Button("ENTER DATA", getCenter(bigButtonWidth),
-					300,
-					bigButtonWidth,
-					bigButtonHeight);
+				300,
+				bigButtonWidth,
+				bigButtonHeight);
 		button1=new Button("Biked 1 Mi",
-					75,
-					300,
-					WIDTH/5,
-					HEIGHT/4);
+				75,
+				300,
+				WIDTH/5,
+				HEIGHT/4);
 		button3=new Button("Biked 3 Mi", 
-					275, 
-					300, 
-					WIDTH/5, 
-					HEIGHT/4);
+				275, 
+				300, 
+				WIDTH/5, 
+				HEIGHT/4);
 		button5=new Button("Biked 5 Mi", 
-					475, 
-					300, 
-					WIDTH/5, 
-					HEIGHT/4);
+				475, 
+				300, 
+				WIDTH/5, 
+				HEIGHT/4);
 		button10=new Button("Biked 10 Mi",
-					675, 
-					300, 
-					WIDTH/5, 
-					HEIGHT/4);
+				675, 
+				300, 
+				WIDTH/5, 
+				HEIGHT/4);
 		noPlayButton=new Button("You do not have enough points to play", 
-					0, 
-					0, 
-					WIDTH, 
-					HEIGHT);
+				0, 
+				0, 
+				WIDTH, 
+				HEIGHT);
 		al=new ArtLoader();
 		mw=new MouseWatcher(gameButton,dataButton,backButton,enterDataButton, button1, button3, button5, button10, noPlayButton);
 		kw = new KeyWatcher();
@@ -127,9 +128,9 @@ public class Menu extends Canvas implements Runnable{
 		this.setFocusable(true);
 		new GameWindow(this,jf);
 		game = new Game(this,true,thread);
-		
+
 	}
-	
+
 	private int getCenter(int width) {
 		return WIDTH/2-width/2;
 	}
@@ -161,14 +162,22 @@ public class Menu extends Canvas implements Runnable{
 		}
 		if(appState==APP_STATE.DATA_ENTRY) {
 			backButton.draw(g, Color.red);
-//			button1.draw(g, Color.blue);
-//			button3.draw(g, Color.cyan);
-//			button5.draw(g, Color.blue);
-//			button10.draw(g, Color.cyan);
-			g.drawString(kw.getInput(),100,100);
+			//			button1.draw(g, Color.blue);
+			//			button3.draw(g, Color.cyan);
+			//			button5.draw(g, Color.blue);
+			//			button10.draw(g, Color.cyan);
+
+			g.drawString("Please enter miles traveled", 100, 400);
+			String strMiles = kw.getInput();
+			if(!strMiles.isEmpty()) {
+				t=Integer.parseInt(strMiles);
+				g.drawString(String.format("%d",t), 100, 500);
+				System.out.println(strMiles);
+			}
+		
 		}
 		if(appState==APP_STATE.GAME_TEE_HEE) {
-			
+
 			game.draw(g);
 		}
 		if(appState == APP_STATE.NO_PLAY) {
@@ -177,16 +186,22 @@ public class Menu extends Canvas implements Runnable{
 
 
 	}
-	
+
+	public static void calcPointsWhenEnterPressed() {
+		points=new Points(20,t);
+		numOfSpendablePoints += points.getPoints();
+		gramsSaved += points.getCarbonE();
+		Points.fileOutput(gramsSaved, 20, numOfSpendablePoints);
+	}
 	private void update() {
-		
+
 		if(appState==APP_STATE.MAIN_MENU) {}
 		if(appState==APP_STATE.DATA_ENTRY) {}
 		if(appState==APP_STATE.GAME_TEE_HEE) {
 			game.update();
 		}
 		if(appState == APP_STATE.NO_PLAY) {
-			
+
 		}
 	}
 	public void pause() {
