@@ -177,7 +177,6 @@ public class Menu extends Canvas implements Runnable{
 		
 		}
 		if(appState==APP_STATE.GAME_TEE_HEE) {
-
 			game.draw(g);
 		}
 		if(appState == APP_STATE.NO_PLAY) {

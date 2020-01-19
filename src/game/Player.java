@@ -7,9 +7,9 @@ import input.KeyWatcher;
 import res.ArtLoader;
 
 public class Player extends Meeple{
-	boolean facingRight= false;
-	public Player(MEEPLE_ID id, int x, int y) {
-		super(id, x, y);
+	boolean facingRight=false;
+	public Player(MEEPLE_ID id,int x,int y) {
+		super(id,x,y);
 		init();
 	}
 	public void init() {
@@ -81,7 +81,7 @@ public class Player extends Meeple{
 		}
 		if(dCol) {
 			if(KeyWatcher.upKeyDown) {
-				yv=-20;
+				yv=-14;
 				dCol=false;
 			}
 		}else {
